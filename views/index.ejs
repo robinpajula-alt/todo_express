@@ -19,7 +19,7 @@
                             <form class="col s12">
                                 <div class="row">
                                     <div class="input-field col s12">
-                                        <input placeholder="Task" id="task" type="text">
+                                        <input id="task" type="text">
                                         <label for="task">Insert Task</label>
                                     </div>
                                 </div>
@@ -29,10 +29,10 @@
                     </div>
                     <div class="card-action">
                             <ul class="collection">
-                                <li class="collection-item">Study HTML</li>
-                                <li class="collection-item">Study CSS</li>
-                                <li class="collection-item">Study JS</li>
-                                <li class="collection-item">Study OOP</li>
+                            <% console.log(tasks) %>
+                            <% tasks.forEach((task) => { %>
+                                <li class="collection-item"><%= task %></li>
+                            <% }) %>
                             </ul>
                     </div>
                 </div>
