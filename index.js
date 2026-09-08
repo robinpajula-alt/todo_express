@@ -19,6 +19,17 @@ const readFile = (filename) => {
   });
 };
 
+const writeFile = (filename, data) => {
+  return new Promise((resolve, reject) => {
+    fs.writeFile(filename, data, 'utf-8', err => {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      resolve(true)
+    });
+  })
+}
 app.get("/", (req, res) => {
   readFile("./tasks.json").then((tasks) => {
     console.log(tasks);
@@ -45,15 +56,8 @@ app.post("/", (req, res) => {
     console.log(tasks)
     data= JSON.stringify(tasks, null, 2)
     console.log(data)
-    fs.writeFile("./tasks.json", data, (err) => {
-      if (err) {
-        console.error(err);
-        return;
-      } else{
-        console.log("saved")
-      } 
-      res.redirect("/");
-    });
+    writeFile("tasks.json", data)
+    res.redirect("/");
   });
 });
 
@@ -67,13 +71,8 @@ app.get('/delete-task/:taskId', (req, res) => {
       }
     })
     data = JSON.stringify(tasks, null, 2)
-    fs.writeFile('./tasks.json', data, 'utf-8', err => {
-      if (err) {
-        console.error(err);
-        return;
-      }
-      res.redirect('/')
-    })
+    writeFile("tasks.json", data)
+    res.redirect('/')
   })
 })
 
