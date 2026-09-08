@@ -1,9 +1,5 @@
 [
   {
-    "id": 1,
-    "task": "Study HTML"
-  },
-  {
     "id": 2,
     "task": "Study CSS"
   },
@@ -18,17 +14,5 @@
   {
     "id": 5,
     "task": "Learn Melbourne shuffle"
-  },
-  {
-    "id": 6,
-    "task": "Learn Jumpstyle"
-  },
-  {
-    "id": 7,
-    "task": "vbeat"
-  },
-  {
-    "id": 8,
-    "task": "fasb"
   }
 ]
