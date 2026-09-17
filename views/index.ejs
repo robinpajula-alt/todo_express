@@ -15,6 +15,13 @@
             <div class="col s12">
                 <div class="card">
                     <div class="card-content">
+                        <% if (error !== null) { %>
+                        <div class="row teal lighten-4">
+                            <div class="col s12">
+                                <p class="center-align"><%= error%></p>
+                            </div>
+                        </div>
+                        <% } %>
                         <span class="card-title">ToDo List</span>
                         <div class="row">
                             <form class="col s12" method="post" action="/">
@@ -24,7 +31,7 @@
                                         <label for="task">Insert Task</label>
                                     </div>
                                 </div>
-                                <input class="btn" type="submit" value="Add Task">
+                                <input class="btn blu   e" type="submit" value="Add Task">
                             </form>
                         </div>
                     </div>

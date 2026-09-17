@@ -37,15 +37,28 @@ const writeFile = (filename, data) => {
 app.get("/", (req, res) => {
   readFile("./tasks.json").then((tasks) => {
     console.log(tasks);
-    res.render("index", { tasks: tasks });
+    res.render("index", {
+      tasks: tasks,
+      error: null
+    });
   });
 });
 
 // add new task
 app.post("/", (req, res) => {
   // tasks list data from file
+  let error = null 
+  if(req.body.task.trim().length == 0) {
+    error = "Please insert correct task data"
+    readFile("./tasks.json").then(tasks => {
+      res.render("index", { tasks: tasks, error: error
+
+       });
+    });
+  } else {
   readFile("./tasks.json").then((tasks) => {
-    // create new id automatically
+    // create new id a 
+    // utomatically
     let index;
     if (tasks.length === 0) {
       index = 0;
@@ -66,7 +79,8 @@ app.post("/", (req, res) => {
     writeFile("tasks.json", data);
     // redirect to / to see result
     res.redirect("/");
-  });
+    })
+  };
 });
 
 // delete task by id
