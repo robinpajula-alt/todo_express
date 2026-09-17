@@ -4,13 +4,11 @@
     <title>todo list</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <!-- Page Content goes here -->
         <div class="row">
             <div class="col s12">
                 <div class="card">
@@ -18,37 +16,27 @@
                         <% if (error !== null) { %>
                         <div class="row teal lighten-4">
                             <div class="col s12">
-                                <p class="center-align"><%= error%></p>
+                                <p class="center-align"><%= error %></p>
                             </div>
                         </div>
                         <% } %>
                         <span class="card-title">ToDo List</span>
                         <div class="row">
-                            <form class="col s12" method="post" action="/">
+                            <!-- SIIN ON MÄÄRATUD VORM JA SELLE TEGEVUS -->
+                            <form class="col s12" method="post" action="/update-task">
                                 <div class="row">
                                     <div class="input-field col s12">
-                                        <input placeholder="Task" id="task" type="text" name="task">
-                                        <label for="task">Insert Task</label>
+                                        <input placeholder="Task" id="task" type="text" name="task" value="<%= task.task %>">
+                                        <label for="task">Update Task</label>
+                                        <!-- Peidetud väli hoiab ID-d -->
+                                        <input id="taskId" type="hidden" name="taskId" value="<%= task.id %>">
                                     </div>
                                 </div>
-                                <input class="btn blue" type="submit" value="Add Task">
+                                <input class="btn" type="submit" value="Update Task">
+                                <a class="btn" href="/">Cancel</a>
                             </form>
                         </div>
                     </div>
-                    <div class="card-action">
-                            <ul class="collection">
-                            <% console.log(tasks) %>
-                            <% tasks.forEach((task) => { %>
-                                <li class="collection-item">
-                                    <%= task.task %>
-                                    <a href="delete-task/<%= task.id %>"class="secondary-content"><i class="material-icons">delete</i></a>
-                                    <a href="/update-task/<%= task.id %>"class="secondary-content"><i class="material-icons">edit</i></a>
-                                </li>
-                            <% }) %>
-                            </ul>
-                            <a href="/delete-tasks" class="btn">DELETE ALL</a>
-                    </div>
-
                 </div>
             </div>
         </div>

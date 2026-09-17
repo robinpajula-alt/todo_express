@@ -112,6 +112,40 @@ app.get("/delete-tasks", (req, res) => {
   });
 });
 
+//edit task
+app.get("/update-task/:taskId", (req, res) => {
+  const taskId = parseInt(req.params.taskId);
+  readFile("./tasks.json").then(tasks => {
+    const taskToUpdate = tasks.find(t => t.id === taskId)
+    console.log("Task for updating =>", taskToUpdate);
+    res.render("update", { task: taskToUpdate, error: null });
+  })
+})
+
+// update task
+app.post("/update-task", (req, res) => {
+  const taskId = parseInt(req.body.taskId);
+  const updatedTaskText = req.body.task;
+  console.log("Task data from update form =>", { id: taskId, task: updatedTaskText });
+  if (!updatedTaskText || updatedTaskText.trim().length === 0) {
+    const error = "Please insert correct task data";
+    res.render("update", { 
+      task: { id: taskId, task: updatedTaskText }, 
+      error: error 
+    });
+  } else {
+    readFile("./tasks.json").then(tasks => {
+      const taskIndex = tasks.findIndex(t => t.id === taskId);
+      if (taskIndex !== -1) {
+        tasks[taskIndex].task = updatedTaskText;
+      }
+      const data = JSON.stringify(tasks, null, 2);
+      writeFile("./tasks.json", data).then(() => {
+        res.redirect("/");
+      });
+    });
+  }
+});
 app.listen(3001, () => {
   console.log("Example app is started at http://localhost:3001");
-});
+})
